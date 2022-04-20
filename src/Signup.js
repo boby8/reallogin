@@ -9,8 +9,9 @@ export default function Signup() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  function getSignUpData() {
+  const getSignUpData = () => {
     let url = `https://secure-refuge-14993.herokuapp.com/add_user?username=${userName}&password=${password}&role=${role}`;
 
     fetch(url)
@@ -19,12 +20,17 @@ export default function Signup() {
         setSignUp(data);
         console.log(data);
       });
-  }
+  };
+
+  const raisedError = () => {
+   for(let i=0;i<signUp.length;i++){
+     console.log(signUp[i])
+   }
+  };
 
   return (
     <>
       <main>
-       
         <h1>Sign-up here</h1>
         <label htmlFor="name">Fullname : </label>
         <input
@@ -65,9 +71,16 @@ export default function Signup() {
         </select>
         <br />
         <br />
-
-        <button onClick={getSignUpData}>Sign Up</button> <br />
-        <br /> 
+        <button
+          onClick={() => {
+            getSignUpData();
+            raisedError();
+          }}
+        >
+          Sign Up
+        </button>
+        <br />
+        <br />
         <button onClick={() => navigate("login")}>Login</button>
       </main>
     </>
