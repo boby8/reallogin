@@ -61,12 +61,13 @@ export default function Signup() {
           <option value="Front-end developer">Front-end developer</option>
           <option value="Back-end developer">Back-end developer</option>
           <option value="Full-Stack-Developer">Full-Stack-Developer</option>
+          <option value="Graphic designer">Graphic designer</option>
         </select>
         <br />
         <br />
 
-        <button onClick={getSignUpData}>Sign Up</button>  <br />
-        <br />
+        <button onClick={getSignUpData}>Sign Up</button> <br />
+        <br /> 
         <button onClick={() => navigate("login")}>Login</button>
       </main>
     </>
