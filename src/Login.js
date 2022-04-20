@@ -1,12 +1,17 @@
 import { useState } from "react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
+  
+
   const [loginData, setLoginData] = useState([]);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMsz, setErrorMsz] = useState([]);
-
+  const [errorName, setErrorName] = useState({});
+  const [errorPassword, setErrorPassword] = useState({});
+  const [id, setId] = useState(false);
   function getLoginData() {
     let url = `https://secure-refuge-14993.herokuapp.com/login?username=${userName}&password=${password}`;
 
@@ -15,56 +20,61 @@ export default function Login() {
       .then((data) => {
         setLoginData(data);
         console.log(data);
+        setId(true);
       });
   }
 
-  const loginError = () => {
-    console.log("error");
-    loginData.map((msz) => {
-      setErrorMsz(msz.error);
-      return errorMsz;
-    });
+  const validateUserName = () => {
+    if (userName.length == 0) {
+      setErrorName("* Please Enter your Name");
+    } else {
+      setErrorName("");
+    }
   };
 
-  
-  return (
+  const validatePassword = () => {
+    if (password.length == 0) {
+      setErrorPassword("* Please Enter Your Password ");
+    } else {
+      setErrorPassword("");
+    }
+  };
 
+  return (
     <>
       <main>
-        {/* <div>
-        {login.map((msz)=>{
-          return setError(msz.error);
-        })}
-        </div> */}
-
         <h1>Login here</h1>
-        
-        <label htmlFor="name">Fullname : </label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          autoComplete="off"
-          onChange={(e) => {
-            setUserName(e.target.value);
-          }}
-        />
-        <br />
-        <br />
-        <label htmlFor="password">Password : </label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-        <br />
-        <br />
-        <button onClick={getLoginData}>Login</button>
-        <button onClick={loginError}>error</button>
-    
+        <form >
+          <label htmlFor="name">Fullname : </label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            autoComplete="off"
+            value={userName}
+            onChange={(e) => {
+              setUserName(e.target.value);
+            }}
+          />
+          <br />
+
+          <br />
+          <label htmlFor="password">Password : </label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+          <br />
+          <br />
+          <button
+            onClick={() => navigate("dashboard")}>
+            Login
+          </button>
+        </form>
       </main>
     </>
   );
