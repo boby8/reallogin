@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function DashBoard() {
+export default function NoMatch() {
   return (
     <div>
-      You are login
+      Page Not Found!
     </div>
   )
 }

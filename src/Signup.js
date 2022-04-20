@@ -120,7 +120,8 @@ export default function Signup() {
         </button>
         <br />
         <br />
-        <button onClick={() => navigate("login")}>Login</button>
+        {/* <button onClick={() => navigate("login")}>Login</button>
+        <button onClick={()=> navigate("details")}></button> */}
       </main>
     </>
   );

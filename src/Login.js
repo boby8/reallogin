@@ -4,14 +4,13 @@ import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const navigate = useNavigate();
-  
 
   const [loginData, setLoginData] = useState([]);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [errorName, setErrorName] = useState({});
   const [errorPassword, setErrorPassword] = useState({});
-  const [id, setId] = useState(false);
+
   function getLoginData() {
     let url = `https://secure-refuge-14993.herokuapp.com/login?username=${userName}&password=${password}`;
 
@@ -20,7 +19,6 @@ export default function Login() {
       .then((data) => {
         setLoginData(data);
         console.log(data);
-        setId(true);
       });
   }
 
@@ -44,7 +42,7 @@ export default function Login() {
     <>
       <main>
         <h1>Login here</h1>
-        <form >
+        <form>
           <label htmlFor="name">Fullname : </label>
           <input
             type="text"
@@ -70,10 +68,11 @@ export default function Login() {
           />
           <br />
           <br />
-          <button
-            onClick={() => navigate("dashboard")}>
+          <button onClick={()=> navigate("details")}>
             Login
           </button>
+          
+          {/* <button onClick={()=> navigate("details")}></button> */}
         </form>
       </main>
     </>
