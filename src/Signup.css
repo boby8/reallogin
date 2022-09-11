@@ -19,6 +19,7 @@ button{
     background-color: rgb(23, 197, 23);
     border: 2px solid rgb(23, 197, 23);
     border-radius: 20px;
+    font-weight: 600;
 }
 input{
     width: 60%;
@@ -30,4 +31,5 @@ option{
 }
 p{
     color:rgb(239, 24, 24);
+    font-weight: bold;
 }

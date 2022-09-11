@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "./Signup.css";
 
 export default function Signup() {
-  const navigate = useNavigate();
-
   const [signUp, setSignUp] = useState([]);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const[errorPassword,setErrorPassword]=useState("");
-  const[roleError,setRoleError]=useState("");
+  const [errorPassword, setErrorPassword] = useState("");
+  const [roleError, setRoleError] = useState("");
+  const [userMessage, setUserMessage] = useState("");
 
   const getSignUpData = () => {
     let url = `https://secure-refuge-14993.herokuapp.com/add_user?username=${userName}&password=${password}&role=${role}`;
@@ -27,35 +25,71 @@ export default function Signup() {
   const validateUserName = () => {
     if (userName.length == 0) {
       setErrorMessage("* Please Enter your Name");
-     
     } else {
       setErrorMessage("");
     }
   };
 
-  const validatePassword =()=>{
-    if(password.length == 0){
+  const validatePassword = () => {
+    if (password.length == 0) {
       setErrorPassword("* Please Enter Your Password ");
-    }
-    else if(password.length < 8){
+    } else if (password.length < 8) {
       setErrorPassword("* Please Enter Minimum 8 character");
+    } else {
+      setErrorPassword("");
     }
-    else{
-      setErrorPassword("")
-    }
-  }
-  const validateRole = () =>{
-    if(role.length== 0){
-      setRoleError("* Please select your role")
-    }
-    else{
+  };
+  const validateRole = () => {
+    if (role.length == 0) {
+      setRoleError("* Please select your role");
+    } else {
       setRoleError("");
     }
-  }
+  };
 
-  const errorr = () =>{
-    console.log(signUp.message)
-  }
+  const errorr = () => {
+    if (
+      userName.length != 0 &&
+      password.length != 0 &&
+      role.length != 0 &&
+      password.length >= 8
+    ) {
+      setUserMessage(signUp.message);
+      console.log(signUp.message);
+    }
+  };
+
+  const clear = () => {
+    if (
+      userName.length != 0 &&
+      password.length != 0 &&
+      role.length != 0 &&
+      password.length >= 8
+    ) {
+      if (signUp.error == 0) {
+        console.log("0")
+        alert("Your data is saved!");
+        setUserName("");
+        setPassword("");
+        setRole("");
+      }
+      else if(signUp.error == 1){
+        console.log("1")
+        setErrorMessage(signUp.message);
+      }
+    }
+  };
+
+  const getData = () => {
+    if (
+      userName.length != 0 &&
+      password.length != 0 &&
+      password.length >= 0 &&
+      role.length != 0
+    ) {
+      getSignUpData();
+    }
+  };
 
   return (
     <>
@@ -108,20 +142,21 @@ export default function Signup() {
         <br />
         <button
           onClick={() => {
-           
             validateUserName();
             validatePassword();
             validateRole();
-            getSignUpData();
             errorr();
+            getData();
+
+            clear();
           }}
         >
           Sign Up
         </button>
         <br />
         <br />
-        {/* <button onClick={() => navigate("login")}>Login</button>
-        <button onClick={()=> navigate("details")}></button> */}
+        {/* <button onClick={() => navigate("login")}>Login</button> */}
+        <p>{userMessage}</p>
       </main>
     </>
   );

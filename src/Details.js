@@ -1,9 +1,14 @@
 import React from 'react'
 
 export default function Details() {
+
+function getData(){
+  console.log("data");
+}
   return (
-    <div>
-     <p>details</p>
-    </div>
+    <>
+      <p>hello</p>
+      <button onclick={()=>getData()}>c</button>
+    </>
   )
 }
